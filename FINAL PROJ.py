@@ -16,7 +16,7 @@ SHAPES = [
     {
         "id": "circle",
         "name": "Circle",
-        "examples": ["Circle Clock", "Coin", "Pizza", "Plate", "Button"],
+        "examples": ["Circle     Clock", "Coin", "Pizza", "Plate", "Button"],
         "ascii": "  OOO  \n O   O \n O   O \n  OOO  ",
         "sides": 1,
         "char": "O"
@@ -129,8 +129,7 @@ class ShapeTowerGame:
         for widget in self.main_container.winfo_children():
             widget.destroy()
 
-    #MENU SECTIONS
-
+#MENU SECTIONS
     def show_menu(self):
         self.cancel_all_timers()
         self.clear_container()
@@ -156,8 +155,7 @@ class ShapeTowerGame:
         for child in frame.winfo_children():
             child.bind("<Button-1>", lambda e: self.start_tower())
 
-    #GAME FUNCTIONS
-
+#GAME FUNCTIONS
     def start_tower(self):
         self.points        = 0
         self.current_level = 1
@@ -189,7 +187,7 @@ class ShapeTowerGame:
             self.image_cache[key] = load_image(path, size)
         return self.image_cache[key]
 
-    #RENDERING
+#RENDERING
     def render_game(self):
         self.clear_container()
         self.root.update_idletasks()
@@ -202,7 +200,7 @@ class ShapeTowerGame:
         scale_y = canv_h / 600
         scale   = min(scale_x, scale_y)
 
-        #Header
+#Header
         header = tk.Frame(self.main_container, bg=COLORS["bg"], pady=int(10 * scale_y))
         header.pack(fill="x", padx=int(40 * scale_x))
         tk.Label(header, text="TOWER: EASY", font=("Helvetica", int(10 * scale), "bold"),
@@ -223,7 +221,7 @@ class ShapeTowerGame:
                                     bg=COLORS["bg"], fg=COLORS["text"])
         self.timer_label.pack(side="right")
 
-        #Canvas
+#Canvas
         self.canvas = tk.Canvas(self.main_container, bg=COLORS["bg"], highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
 
@@ -254,7 +252,7 @@ class ShapeTowerGame:
                 font=("Helvetica", int(8 * scale), "bold")
             )
 
-        # Draggable item
+#Draggable item
         drag_w, drag_h   = 100 * scale, 100 * scale
         self.drag_home_x = canv_w / 2
         self.drag_home_y = canv_h * 0.75
@@ -297,7 +295,7 @@ class ShapeTowerGame:
                 self.root.after_cancel(self.main_timer_id)
             self.update_timer()
 
-    #Timer
+#Timer
     def update_timer(self):
         if not self.timer_running or self.status != "playing":
             self.main_timer_id = None
@@ -316,7 +314,7 @@ class ShapeTowerGame:
             except tk.TclError:
                 self.main_timer_id = None
 
-    #Drag Function
+#Drag Function
     def on_drag_start(self, event):
         self.drag_data["x"] = event.x
         self.drag_data["y"] = event.y
@@ -352,7 +350,7 @@ class ShapeTowerGame:
                                    self.drag_home_x + w, self.drag_home_y + h)
             self.canvas.coords(self.drag_item_content, self.drag_home_x, self.drag_home_y)
 
-    #Outcome 
+#Outcome 
     def handle_success(self):
         self.timer_running = False
         earned       = max(1, int(10 * (self.time_left / TIME_LIMIT)))
@@ -402,9 +400,8 @@ class ShapeTowerGame:
         tk.Button(self.main_container, text="BACK TO MENU", command=self.show_menu,
                   bg=COLORS["accent"], fg="black", font=("Helvetica", 12, "bold"),
                   padx=20, pady=10, borderwidth=0).pack(pady=20)
-
-    #Helpers
-
+        
+#Helpers
     def cancel_all_timers(self):
         if self.main_timer_id:
             self.root.after_cancel(self.main_timer_id)
