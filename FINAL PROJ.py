@@ -281,7 +281,7 @@ class ShapeTowerGame:
 
         self.canvas.create_text(
             self.drag_home_x, self.drag_home_y + drag_h / 2 + 20 * scale_y,
-            text="MATCH THE OBJECT!", fill=COLORS["bonus"],
+            text="!!!MATCH THE OBJECT!!!", fill=COLORS["bonus"],
             font=("Helvetica", int(8 * scale), "bold")
         )
 
